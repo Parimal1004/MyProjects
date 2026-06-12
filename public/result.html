@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Result</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+font-family:'Segoe UI';
+margin:0;
+padding:20px;
+min-height:100vh;
+
+background: linear-gradient(
+135deg,
+#0f0f1a,
+#1c1c2e,
+#2a2a40,
+#1a1a2e
+);
+
+color:white;
+text-align:center;
+}
+
+/* container */
+.container{
+max-width:800px;
+margin:auto;
+
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:12px;
+
+backdrop-filter:blur(10px);
+}
+
+/* button */
+button{
+margin:10px;
+padding:12px 20px;
+background:#ff3c00;
+border:none;
+color:white;
+border-radius:6px;
+cursor:pointer;
+}
+
+button:hover{
+background:#ff5722;
+}
+
+/* question box */
+.question-box{
+margin:15px 0;
+padding:12px;
+background:rgba(255,255,255,0.08);
+border-radius:8px;
+text-align:left;
+}
+
+.correct{
+background:green;
+color:white;
+padding:2px 5px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Successfully Submitted</h2>
+
+<p id="score"></p>
+
+<button onclick="showAnswers()">Check Response</button>
+<button onclick="goBack()">Go to Subjects</button>
+
+<div id="answersContainer"></div>
+
+</div>
+
+<script>
+
+const answers = JSON.parse(localStorage.getItem("lastAnswers"));
+const questions = JSON.parse(localStorage.getItem("lastQuestions"));
+const score = localStorage.getItem("lastScore");
+const total = localStorage.getItem("lastTotal");
+
+document.getElementById("score").innerText =
+"Score: " + score + " / " + total;
+
+function showAnswers(){
+
+    const container = document.getElementById("answersContainer");
+    container.innerHTML = "";
+
+    questions.forEach((q, i) => {
+
+        let html = `
+        <div class="question-box">
+        <p><b>${i+1}. ${q.question}</b></p>
+        `;
+
+        q.options.forEach((opt, j) => {
+
+            if(q.answer === j){
+                html += `<div class="correct">${opt}</div>`;
+            }
+            else{
+                html += `<div>${opt}</div>`;
+            }
+
+        });
+
+        html += "</div>";
+
+        container.innerHTML += html;
+    });
+}
+
+function goBack(){
+    window.location.href = "subjects.html";
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Register</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* ===== IMAGE BACKGROUND ===== */
+body{
+font-family:'Segoe UI';
+margin:0;
+height:100vh;
+
+background:url("https://images.unsplash.com/photo-1498050108023-c5249f4df085")
+no-repeat center center/cover;
+
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* ===== DARK OVERLAY ===== */
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+z-index:-1;
+}
+
+/* ===== GLASS CARD ===== */
+.box{
+background:rgba(0,0,0,0.75);
+padding:35px;
+border-radius:12px;
+width:320px;
+
+text-align:center;
+color:white;
+
+display:flex;
+flex-direction:column;
+gap:12px;
+
+backdrop-filter:blur(12px);
+box-shadow:0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* INPUT + BUTTON */
+input, button, .login-btn{
+width:100%;
+box-sizing:border-box;
+}
+
+/* INPUT */
+input{
+padding:12px;
+border-radius:6px;
+border:none;
+
+background:rgba(255,255,255,0.1);
+color:white;
+}
+
+input::placeholder{
+color:#ccc;
+}
+
+/* REGISTER BUTTON */
+button{
+padding:12px;
+background:#ff3c00;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#ff5722;
+}
+
+/* LOGIN BUTTON */
+.login-btn{
+padding:12px;
+background:#007bff;
+color:white;
+border-radius:6px;
+text-align:center;
+text-decoration:none;
+display:block;
+transition:0.3s;
+}
+
+.login-btn:hover{
+background:#0056b3;
+}
+
+/* TEXT */
+p{
+margin-top:10px;
+font-size:14px;
+}
+
+a{
+color:#00bfff;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Register</h2>
+
+<input id="name" placeholder="Name">
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="register()">Register</button>
+
+<a href="login.html" class="login-btn">Login</a>
+
+</div>
+
+<script>
+function register(){
+
+let name=document.getElementById("name").value.trim();
+let email=document.getElementById("email").value.trim();
+let password=document.getElementById("password").value.trim();
+
+if(!name || !email || !password){
+alert("Fill all fields");
+return;
+}
+
+localStorage.setItem(email, JSON.stringify({name,email,password}));
+
+alert("Registered!");
+window.location.href="login.html";
+}
+</script>
+
+</body>
+</html>
